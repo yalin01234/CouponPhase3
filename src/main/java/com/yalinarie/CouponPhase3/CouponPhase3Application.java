@@ -24,6 +24,8 @@ public class CouponPhase3Application {
 		Person p4 = new Person("eee", 50);
 		Person p5 = new Person("fff", 60);
 		System.out.println("Go-Done!");
+		System.out.println("Go-Done1111!");
+		System.out.println("Go-Done1222!");
 
 		// dao.addPerson(p);
 		// dao.addPerson(p1);
