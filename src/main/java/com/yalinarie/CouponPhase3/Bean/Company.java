@@ -68,6 +68,14 @@ public class Company {
 		this.email = email;
 	}
 
+	public List<Coupon> getCoupons() {
+		return coupons;
+	}
+
+	public void setCoupons(List<Coupon> coupons) {
+		this.coupons = coupons;
+	}
+
 	private List<Coupon> coupons = new ArrayList<>();
 
 	// @Entity

@@ -29,6 +29,7 @@ public class CompanyServiceImpl implements CompanyService {
 	private Company company;
 
 	@Override
+	@Transactional
 	public void addCoupon(Coupon coupon) throws Exception {
 
 		// couponRepository.save(coupon);
@@ -40,33 +41,43 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	@Override
+	@Transactional
 	public void removeCoupon(Coupon coupon) throws Exception {
-		// TODO Auto-generated method stub
+		List<Coupon> companyCoupons = getAllCompanyCoupons();
+		companyCoupons.remove(coupon);
+		this.company.setCoupons(companyCoupons);
+		companyRepository.save(this.company);
+		couponRepository.delete(coupon);
 
 	}
 
 	@Override
+	@Transactional
 	public void updateCoupon(Coupon coupon) throws Exception {
-		// TODO Auto-generated method stub
+		couponRepository.save(coupon);
 
 	}
 
 	@Override
+	@Transactional
 	public Company getCompany(long companyId) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		Company company = companyRepository.findByCompanyId(companyId);
+		return company;
 	}
 
 	@Override
+	@Transactional
 	public List<Company> getAllCompany() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		List<Company> Companies = companyRepository.findAll();
+
+		return Companies;
 	}
 
 	@Override
+	@Transactional
 	public Company getCompany(String compName) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		Company company = companyRepository.findByCompName(compName);
+		return company;
 	}
 
 	@Override
@@ -75,17 +86,14 @@ public class CompanyServiceImpl implements CompanyService {
 		List<Coupon> coupons = couponRepository.findAllByCompanyId(getCompany().getCompanyId());
 		return coupons;
 	}
-	
-    @Transactional
-    public void setCompany(Company company) {
-            this.company = company;
-        }
 
-    
-    @Transactional
-    public Company getCompany() {
-        return this.company;
-    }
+	@Transactional
+	public void setCompany(Company company) {
+		this.company = company;
 	}
 
+	@Transactional
+	public Company getCompany() {
+		return this.company;
+	}
 }

@@ -1,5 +1,8 @@
 package com.yalinarie.CouponPhase3.Bean;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -74,6 +77,17 @@ public class Customer {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	private List<Coupon> coupons = new ArrayList<>();
+
+	public void setCoupons(List<Coupon> coupons) {
+		this.coupons = coupons;
+	}
+
+	public List<Coupon> getCoupons() {
+		// TODO Auto-generated method stub
+		return coupons;
 	}
 
 }
