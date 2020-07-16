@@ -15,6 +15,8 @@ public interface AdminService {
 
 	public Company getCompany(long companyId) throws Exception;
 
+	public Company getCompanybyName(String compName) throws Exception;
+
 	public List<Company> getAllCompanies() throws Exception;
 
 	public void addCustomer(Customer customer) throws Exception;

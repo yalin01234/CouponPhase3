@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -14,16 +15,22 @@ import javax.persistence.Table;
 @Table(name = "CompanyJPATable")
 public class Company {
 
+	@Column
 	private String compName;
+
+	@Id
+	@GeneratedValue
 	private long companyId;
+
+	@Column
 	private String password;
+
+	@Column
 	private String email;
 
 	public Company() {
 	}
 
-	@Id
-	@GeneratedValue
 	public long getCompanyId() {
 		return companyId;
 	}
@@ -40,7 +47,6 @@ public class Company {
 		this.email = email;
 	}
 
-	@Column
 	public String getCompName() {
 		return compName;
 	}
@@ -49,17 +55,14 @@ public class Company {
 		this.compName = compName;
 	}
 
-	@Column
 	public String getPassword() {
 		return password;
 	}
 
-	@Column
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	@Column
 	public String getEmail() {
 		return email;
 	}
@@ -76,6 +79,7 @@ public class Company {
 		this.coupons = coupons;
 	}
 
+	@OneToMany
 	private List<Coupon> coupons = new ArrayList<>();
 
 	// @Entity

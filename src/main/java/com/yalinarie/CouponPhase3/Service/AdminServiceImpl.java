@@ -5,14 +5,17 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import com.yalinarie.CouponPhase3.Bean.ClientType;
 import com.yalinarie.CouponPhase3.Bean.Company;
 import com.yalinarie.CouponPhase3.Bean.Customer;
 import com.yalinarie.CouponPhase3.repo.CompanyRepository;
 import com.yalinarie.CouponPhase3.repo.CouponRepository;
 import com.yalinarie.CouponPhase3.repo.CustomerRepository;
 
-public class AdminServiceImpl implements AdminService {
+@Service
+public class AdminServiceImpl implements AdminService, CouponClient {
 
 	@Autowired
 	private CompanyRepository companyRepository;
@@ -46,6 +49,14 @@ public class AdminServiceImpl implements AdminService {
 	@Transactional
 	public Company getCompany(long companyId) throws Exception {
 		Company company = companyRepository.findByCompanyId(companyId);
+		return company;
+
+	}
+
+	@Override
+	@Transactional
+	public Company getCompanybyName(String compName) throws Exception {
+		Company company = companyRepository.findByCompName(compName);
 		return company;
 
 	}
@@ -90,6 +101,12 @@ public class AdminServiceImpl implements AdminService {
 	public List<Customer> getAllCustomers() throws Exception {
 		List<Customer> customers = customerRepository.findAll();
 		return customers;
+	}
+
+	@Override
+	public CouponClient login(String userName, String password, ClientType clientType) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

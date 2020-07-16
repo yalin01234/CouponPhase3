@@ -15,10 +15,16 @@ public interface CompanyService {
 
 	public Company getCompany(long companyId) throws Exception;
 
+	public Coupon getCoupon(long coponId) throws Exception;
+
 	public List<Coupon> getAllCompanyCoupons() throws Exception;
 
 	public List<Company> getAllCompany() throws Exception;
 
 	public Company getCompany(String compName) throws Exception;
+
+	public Company getCompany();
+
+	public void setCompany(Company company);
 
 }

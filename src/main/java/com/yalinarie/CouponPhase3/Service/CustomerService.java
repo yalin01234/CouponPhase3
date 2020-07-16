@@ -12,9 +12,11 @@ public interface CustomerService {
 
 	public Customer getCustomersname(String customerName) throws Exception;
 
-	public void SetCustomer(Customer customer) throws Exception;
+	public void setCustomer(Customer customer) throws Exception;
 
 	public void purchaseCoupon(Coupon coupon) throws Exception;
+
+	public List getAllCustomer() throws Exception;
 
 	public List<Coupon> getAllPurchaseCoupons() throws Exception;
 

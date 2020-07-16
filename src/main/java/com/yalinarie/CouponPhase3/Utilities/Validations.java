@@ -68,9 +68,10 @@ public class Validations {
 
 	public static boolean checkIfCompanyExist(Company company) throws Exception {
 		boolean companyExist = false;
-		List<Company> allCompanies = new ArrayList<>();
-		allCompanies = companyRepository.findAll();
-		Iterator<Company> itr = allCompanies.iterator();
+		List<Company> allCompanies = new ArrayList<>();// Import all the companies from the DB.
+		allCompanies = companyRepository.findAll(); // //Import all the companies from the DB.
+		Iterator<Company> itr = allCompanies.iterator();// The aim of Iterator is to import the object form the DB till
+														// the last one.
 
 		while (itr.hasNext()) {
 			Company tempCompany = new Company();
@@ -80,7 +81,7 @@ public class Validations {
 				return companyExist;
 			}
 		}
-		return companyExist;
+		return companyExist; // In case company doesnt exist will return false.
 	}
 
 }

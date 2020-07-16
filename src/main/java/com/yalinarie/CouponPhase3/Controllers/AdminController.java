@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.google.gson.Gson;
 
+import com.google.gson.Gson;
 import com.yalinarie.CouponPhase3.Bean.Company;
 import com.yalinarie.CouponPhase3.Bean.Customer;
 import com.yalinarie.CouponPhase3.Service.AdminService;
 import com.yalinarie.CouponPhase3.Utilities.Validations;
 
-@RestController
+@RestController // meaning the REST API using
 @RequestMapping("/admin")
 public class AdminController {
 
@@ -32,7 +32,7 @@ public class AdminController {
 	private AdminService getService() throws Exception {
 		try {
 			AdminService adminService = null;
-			adminService = (AdminService) request.getSession(false).getAttribute("Service");
+			adminService = (AdminService) request.getSession(false).getAttribute("service");
 			System.out.println("Print Test from the controller ..... " + adminService);
 			return adminService;
 		} catch (Exception ex) {
@@ -113,7 +113,6 @@ public class AdminController {
 		if (adminService != null) {
 			Gson gson = new Gson();
 
-			
 			Company companyFromJson = gson.fromJson(companyJson, Company.class);
 
 			if (companyFromJson.getCompanyId() > 0) {
@@ -199,52 +198,50 @@ public class AdminController {
 	}
 
 	@PostMapping("/updateCustomer")
-	    public ResponseEntity<?> updateCustomer (@RequestBody String customerJson) throws Exception{
+	public ResponseEntity<?> updateCustomer(@RequestBody String customerJson) throws Exception {
 
-	        AdminService adminService = getService();
-	        if ( adminService != null) {
-	        	 Gson gson = new Gson();
-	             Customer jsonCustomer = gson.fromJson(customerJson, Customer.class);
+		AdminService adminService = getService();
+		if (adminService != null) {
+			Gson gson = new Gson();
+			Customer jsonCustomer = gson.fromJson(customerJson, Customer.class);
 
-	             //Print TEST - that all data was parse correctly from the json sent from the Client
-	             System.out.println(jsonCustomer.getCustomerName() + " " + jsonCustomer.getPassword() + " " + jsonCustomer.getId());
+			// Print TEST - that all data was parse correctly from the json sent from the
+			// Client
+			System.out.println(
+					jsonCustomer.getCustomerName() + " " + jsonCustomer.getPassword() + " " + jsonCustomer.getId());
 
-	             if (jsonCustomer.getId() >= 0) {
-	                 if (Validations.checkIfCustomerExist(adminService.getCustomer(jsonCustomer.getId()))) {
-	                     Customer customer = adminService.getCustomer(jsonCustomer.getId());
-	                     if (customer != null) {
-	                         if (jsonCustomer.getCustomerName() != null && !jsonCustomer.getCustomerName().isEmpty()) {
-	                             customer.setCustomerName(jsonCustomer.getCustomerName());
-	                             adminService.updateCustomer(customer);
-	                         } else {
-	                             return new ResponseEntity<>(" Invalid new customer name inserted " ,HttpStatus.BAD_REQUEST);
-	                         }
-	                         if (jsonCustomer.getPassword() != null && !jsonCustomer.getPassword().isEmpty()) {
-	                             customer.setPassword(jsonCustomer.getPassword());
-	                             adminService.updateCustomer(customer);
-	                         } else {
-	                             return new ResponseEntity<>(" Invalid new password inserted " ,HttpStatus.BAD_REQUEST);
-	                         }
-	                     } else {
-	                         return new ResponseEntity<>(" Customer does not exist , Invalid customer details inserted " ,HttpStatus.BAD_REQUEST);
-	                     }
-	                     return new ResponseEntity<>("SUCCEED TO UPDATE CUSTOMER ID: " + customer.getId() ,HttpStatus.OK);
-	                 } else {
-	                     return new ResponseEntity<>("The id that inserted is not valid, please try again." ,HttpStatus.BAD_REQUEST);
-	                 }
-	             } else {
-	                 return new ResponseEntity<>("The id that inserted is not valid, please try again. " ,HttpStatus.BAD_REQUEST);
-	             }
-	         } else {
-	             return new ResponseEntity<>("Unauthorized" , HttpStatus.UNAUTHORIZED);
-	         }
-	     }
-
-	        	
-	        	
-	        	
-	        }
-
-}
+			if (jsonCustomer.getId() >= 0) {
+				if (Validations.checkIfCustomerExist(adminService.getCustomer(jsonCustomer.getId()))) {
+					Customer customer = adminService.getCustomer(jsonCustomer.getId());
+					if (customer != null) {
+						if (jsonCustomer.getCustomerName() != null && !jsonCustomer.getCustomerName().isEmpty()) {
+							customer.setCustomerName(jsonCustomer.getCustomerName());
+							adminService.updateCustomer(customer);
+						} else {
+							return new ResponseEntity<>(" Invalid new customer name inserted ", HttpStatus.BAD_REQUEST);
+						}
+						if (jsonCustomer.getPassword() != null && !jsonCustomer.getPassword().isEmpty()) {
+							customer.setPassword(jsonCustomer.getPassword());
+							adminService.updateCustomer(customer);
+						} else {
+							return new ResponseEntity<>(" Invalid new password inserted ", HttpStatus.BAD_REQUEST);
+						}
+					} else {
+						return new ResponseEntity<>(" Customer does not exist , Invalid customer details inserted ",
+								HttpStatus.BAD_REQUEST);
+					}
+					return new ResponseEntity<>("SUCCEED TO UPDATE CUSTOMER ID: " + customer.getId(), HttpStatus.OK);
+				} else {
+					return new ResponseEntity<>("The id that inserted is not valid, please try again.",
+							HttpStatus.BAD_REQUEST);
+				}
+			} else {
+				return new ResponseEntity<>("The id that inserted is not valid, please try again. ",
+						HttpStatus.BAD_REQUEST);
+			}
+		} else {
+			return new ResponseEntity<>("Unauthorized", HttpStatus.UNAUTHORIZED);
+		}
+	}
 
 }

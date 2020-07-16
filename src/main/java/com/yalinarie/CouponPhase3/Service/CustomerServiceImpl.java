@@ -55,6 +55,7 @@ public class CustomerServiceImpl implements CustomerService, CouponClient {
 		return customer;
 	}
 
+	@Override
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
@@ -90,8 +91,10 @@ public class CustomerServiceImpl implements CustomerService, CouponClient {
 	@Transactional
 	public List<Coupon> getAllPurchaseCoupons() throws Exception {
 
-		List<Coupon> coupons = customerRepository.findById(this.customer.getId()).get().getCoupons();
-		return coupons;
+		// List<Coupon> coupons =
+		// customerRepository.findOne(this.customer.getId()).getCoupons();
+		// return coupons;
+		return null;
 	}
 
 	@Override
@@ -116,8 +119,10 @@ public class CustomerServiceImpl implements CustomerService, CouponClient {
 	@Override
 	@Transactional
 	public Customer getCustomerspassword(String password) throws Exception {
-		Customer customer = customerRepository.findCustomerByCustomerPassword(password);
-		return customer;
+		// Customer customer =
+		// customerRepository.findCustomerByCustomerPassword(password);
+		// return customer;
+		return null;
 	}
 
 	@Override
@@ -149,9 +154,11 @@ public class CustomerServiceImpl implements CustomerService, CouponClient {
 	}
 
 	@Override
-	public void SetCustomer(Customer customer) throws Exception {
-		this.customer = customer;
+	public List<Customer> getAllCustomer() throws Exception {
 
+		List<Customer> AllCustomer = customerRepository.findAll();
+
+		return AllCustomer;
 	}
 
 }

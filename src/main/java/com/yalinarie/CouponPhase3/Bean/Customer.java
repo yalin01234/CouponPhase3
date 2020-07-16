@@ -1,16 +1,11 @@
 package com.yalinarie.CouponPhase3.Bean;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.Table;
 
 @Entity
@@ -46,14 +41,16 @@ public class Customer {
 	// import java.util.List;
 
 	// @OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
-	@JoinTable(name = "Customer_Coupon", joinColumns = { @JoinColumn(name = "customer_id") }, inverseJoinColumns = {
-			@JoinColumn(name = "coupon_id") })
+	// @JoinTable(name = "Customer_Coupon", joinColumns = { @JoinColumn(name =
+	// "customer_id") }, inverseJoinColumns = {
+	// @JoinColumn(name = "coupon_id") })
 	// private List<Coupon> coupons = new ArrayList<>();
 
-	@Override
-	public String toString() {
-		return "Customer [id=" + id + ", customerName=" + customerName + ", password=" + password + "]";
-	}
+	// @Override
+	// public String toString() {
+	// return "Customer [id=" + id + ", customerName=" + customerName + ",
+	// password=" + password + "]";
+	// }
 
 	public long getId() {
 		return id;
@@ -79,15 +76,17 @@ public class Customer {
 		this.password = password;
 	}
 
-	private List<Coupon> coupons = new ArrayList<>();
+	// @Column(nullable = false)
+	// private List<Coupon> coupons = new ArrayList<>();
+	//
+	// public void setCoupons(List<Coupon> coupons) {
+	// this.coupons = coupons;
+	// }
 
-	public void setCoupons(List<Coupon> coupons) {
-		this.coupons = coupons;
-	}
-
-	public List<Coupon> getCoupons() {
-		// TODO Auto-generated method stub
-		return coupons;
-	}
+	// // @OneToMany
+	// public List<Coupon> getCoupons() {
+	// // TODO Auto-generated method stub
+	// return coupons;
+	// }
 
 }

@@ -12,7 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.lang.NonNull;
+//import org.springframework.lang.NonNull;
 
 @Entity
 @Table(name = "CouponJPATable")
@@ -45,45 +45,45 @@ public class Coupon {
 
 	@Basic(optional = false)
 	// @Column(nullable = false , unique = true)
-	@Column
-	private @NonNull String title;
-
-	@Basic(optional = false)
-	@Column
-	private @NonNull Date startDate;
-
-	@Basic(optional = false)
-	@Column
-	private @NonNull Date endDate;
+	@Column(nullable = false)
+	private String title;
 
 	@Basic(optional = false)
 	@Column(nullable = false)
-	private @NonNull int amount;
+	private Date startDate;
 
 	@Basic(optional = false)
-	@Column
+	@Column(nullable = false)
+	private Date endDate;
+
+	@Basic(optional = false)
+	@Column(nullable = false)
+	private int amount;
+
+	@Basic(optional = false)
+	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
-	private @NonNull CouponType type;
+	private CouponType type;
 
 	@Basic(optional = false)
-	@Column
-	private @NonNull String message;
+	@Column(nullable = false)
+	private String message;
 
 	@Basic(optional = false)
-	@Column
-	private @NonNull double price;
+	@Column(nullable = false)
+	private double price;
 
 	@Basic(optional = false)
-	@Column
-	private @NonNull String image;
+	@Column(nullable = false)
+	private String image;
 
 	@Basic(optional = false)
-	@Column
-	private @NonNull long companyId;
+	@Column(nullable = false)
+	private long companyId;
 
 	@Basic(optional = false)
-	@Column
-	private @NonNull boolean isActive;
+	@Column(nullable = false)
+	private boolean isActive;
 
 	public long getId() {
 		return id;
